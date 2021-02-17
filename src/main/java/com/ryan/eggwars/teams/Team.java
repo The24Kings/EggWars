@@ -10,6 +10,7 @@ public class Team {
     private final String name;
     private final TeamColor teamColor;
     private final ArrayList<UUID> players = new ArrayList<>();
+    
     public Team(String name, TeamColor teamColor) {
         this.name = name;
         this.teamColor = teamColor;

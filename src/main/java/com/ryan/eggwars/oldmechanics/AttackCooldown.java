@@ -25,9 +25,7 @@ public class AttackCooldown implements Listener {
         // 4 is default speed, 16 should disable
         // https://minecraft.gamepedia.com/Attribute#Attributes_for_players
         AttributeInstance attribute = player.getAttribute(Attribute.GENERIC_ATTACK_SPEED);
-        if (attribute == null) {
-            return;
-        }
+        if (attribute == null) return;
         
         double baseValue = attribute.getBaseValue();
         

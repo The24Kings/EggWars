@@ -17,20 +17,20 @@ public class TeamManager {
             case RED:
                 red.addPlayer(player);
                 break;
-                
+            
             case YELLOW:
                 yellow.addPlayer(player);
                 break;
-                
+            
             case GREEN:
                 green.addPlayer(player);
                 break;
-                
+            
             case BLUE:
                 blue.addPlayer(player);
                 break;
         }
-    
+        
         player.setDisplayName(teamColor.getChatColor() + player.getName());
     }
     
@@ -39,15 +39,15 @@ public class TeamManager {
             case RED:
                 red.removePlayer(player);
                 break;
-        
+            
             case YELLOW:
                 yellow.removePlayer(player);
                 break;
-        
+            
             case GREEN:
                 green.removePlayer(player);
                 break;
-        
+            
             case BLUE:
                 blue.removePlayer(player);
                 break;
@@ -55,10 +55,10 @@ public class TeamManager {
     }
     
     public static Team getTeam(Player player) {
-    
+        
         for (Team team : teams) {
             if (team.containsPlayer(player)) {
-            // TODO: do the thing
+                // TODO: do the thing
             }
         }
         

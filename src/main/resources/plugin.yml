@@ -1,6 +1,6 @@
 name: EggWars
 version: @version@
-main: com.ryan.eggwars.Eggwars
+main: com.ryan.eggwars.EggWars
 api-version: 1.16
 author: Ryan
 description: idk a game for kings
