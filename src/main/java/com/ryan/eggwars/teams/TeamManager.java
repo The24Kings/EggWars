@@ -1,5 +1,6 @@
 package com.ryan.eggwars.teams;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -34,8 +35,15 @@ public class TeamManager {
         player.setDisplayName(teamColor.getChatColor() + player.getName());
     }
     
-    public static void leaveTeam(Player player, TeamColor team) {
-        switch (team) {
+    public static void leaveTeam(Player player) {
+        TeamColor teamColor = TeamManager.getTeam(player).getTeamColor();
+        
+        if (teamColor == null) {
+            player.sendMessage(ChatColor.RED + "You are not on a team.");
+            return;
+        }
+        
+        switch (teamColor) {
             case RED:
                 red.removePlayer(player);
                 break;
@@ -52,6 +60,9 @@ public class TeamManager {
                 blue.removePlayer(player);
                 break;
         }
+    
+        player.setDisplayName(player.getName());
+        player.sendMessage("Removed you from the " + teamColor + teamColor.name().toLowerCase() + " team.");
     }
     
     public static Team getTeam(Player player) {
@@ -59,6 +70,7 @@ public class TeamManager {
         for (Team team : teams) {
             if (team.containsPlayer(player)) {
                 // TODO: do the thing
+                return team;
             }
         }
         

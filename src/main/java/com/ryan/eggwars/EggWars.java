@@ -1,6 +1,8 @@
 package com.ryan.eggwars;
 
 import com.ryan.eggwars.chat.ChatFormatter;
+import com.ryan.eggwars.commands.JoinTeam;
+import com.ryan.eggwars.commands.JoinTeamTabCompleter;
 import com.ryan.eggwars.oldmechanics.AttackCooldown;
 import com.ryan.eggwars.oldmechanics.PearlCooldown;
 import com.ryan.eggwars.teams.TeamManager;
@@ -33,6 +35,9 @@ public final class EggWars extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PearlCooldown(), this);
         getServer().getPluginManager().registerEvents(new Testing(), this);
         getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
+        
+        getCommand("join").setExecutor(new JoinTeam());
+        getCommand("join").setTabCompleter(new JoinTeamTabCompleter());
     }
     
 }

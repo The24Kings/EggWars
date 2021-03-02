@@ -1,5 +1,6 @@
 package com.ryan.eggwars.teams;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -20,8 +21,16 @@ public class Team {
         return teamColor;
     }
     
+    public ChatColor getChatColor() {
+        return teamColor.getChatColor();
+    }
+    
     public String getName() {
         return name;
+    }
+    
+    public String getColoredName() {
+        return teamColor + name;
     }
     
     public ArrayList<UUID> getPlayers() {
@@ -42,7 +51,6 @@ public class Team {
     
     public void removePlayer(Player player) {
         players.remove(player.getUniqueId());
-        player.setDisplayName(player.getName());
     }
 }
 

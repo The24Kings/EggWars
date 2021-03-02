@@ -4,3 +4,9 @@ main: com.ryan.eggwars.EggWars
 api-version: 1.16
 author: Ryan
 description: idk a game for kings
+
+commands:
+  join:
+    description: Join a team.
+  leave:
+    description: Leaves your team.
