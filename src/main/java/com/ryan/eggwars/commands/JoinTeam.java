@@ -16,6 +16,8 @@ public class JoinTeam implements CommandExecutor {
         if (label.equalsIgnoreCase("join")) {
             if (!(sender instanceof Player)) return true;
             
+            if (args[0] == null) sender.sendMessage("Please specify a team!");
+            
             Player player = (Player) sender;
             
             if (args[0].equalsIgnoreCase("red")) {
@@ -30,8 +32,6 @@ public class JoinTeam implements CommandExecutor {
                 TeamManager.joinTeam(player, TeamColor.BLUE);
     
             }
-            
-            sender.sendMessage("You have joined the " + TeamManager.getTeam(player).getColoredName() + " team!");
         }
         
         return true;

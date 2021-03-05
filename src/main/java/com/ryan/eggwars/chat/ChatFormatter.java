@@ -24,7 +24,7 @@ public class ChatFormatter implements Listener {
         
         // TODO: make the color of the name represent their team's color
         // Makes name colored, chat message white
-        event.setFormat(nameColor + "--%1$s-- " + ChatColor.WHITE + "%2$s");
+        event.setFormat(nameColor + "<%1$s>" + ChatColor.WHITE + "%2$s");
     }
     
 }

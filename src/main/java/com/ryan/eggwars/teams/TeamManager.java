@@ -14,6 +14,11 @@ public class TeamManager {
     private static final ArrayList<Team> teams = new ArrayList<>();
     
     public static void joinTeam(Player player, TeamColor teamColor) {
+        if (getTeam(player) != null) {
+            player.sendMessage(ChatColor.RED + "Please leave your team before joining a new one!");
+            return;
+        }
+        
         switch (teamColor) {
             case RED:
                 red.addPlayer(player);
@@ -33,16 +38,19 @@ public class TeamManager {
         }
         
         player.setDisplayName(teamColor.getChatColor() + player.getName());
+        player.sendMessage("You have joined the " + TeamManager.getTeam(player).getColoredName() + ChatColor.WHITE + " team!");
     }
     
     public static void leaveTeam(Player player) {
-        TeamColor teamColor = TeamManager.getTeam(player).getTeamColor();
+        Team team = TeamManager.getTeam(player);
         
-        if (teamColor == null) {
+        if (team == null) {
             player.sendMessage(ChatColor.RED + "You are not on a team.");
             return;
         }
-        
+    
+        TeamColor teamColor = team.getTeamColor();
+    
         switch (teamColor) {
             case RED:
                 red.removePlayer(player);
@@ -60,9 +68,9 @@ public class TeamManager {
                 blue.removePlayer(player);
                 break;
         }
-    
+        
         player.setDisplayName(player.getName());
-        player.sendMessage("Removed you from the " + teamColor + teamColor.name().toLowerCase() + " team.");
+        player.sendMessage("Removed you from the " + team.getColoredName() + ChatColor.WHITE + " team.");
     }
     
     public static Team getTeam(Player player) {

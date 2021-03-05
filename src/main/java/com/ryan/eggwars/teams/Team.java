@@ -30,7 +30,7 @@ public class Team {
     }
     
     public String getColoredName() {
-        return teamColor + name;
+        return teamColor.getChatColor() + name;
     }
     
     public ArrayList<UUID> getPlayers() {
