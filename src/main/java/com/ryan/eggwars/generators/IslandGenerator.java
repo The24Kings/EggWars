@@ -7,6 +7,9 @@ import java.util.Random;
 
 public class IslandGenerator {
     
+    /**
+     * Starts generating items.
+     */
     public void startGenerator() {
         Random random = new Random();
         final int[] i = {0};

@@ -13,6 +13,12 @@ public class TeamManager {
     public static Team blue = new Team("Blue", TeamColor.BLUE);
     private static final ArrayList<Team> teams = new ArrayList<>();
     
+    /**
+     * Adds the specified player to the specified team.
+     *
+     * @param player    The player the add to the team.
+     * @param teamColor The color of the team to add the player to.
+     */
     public static void joinTeam(Player player, TeamColor teamColor) {
         if (getTeam(player) != null) {
             player.sendMessage(ChatColor.RED + "Please leave your team before joining a new one!");
@@ -41,6 +47,11 @@ public class TeamManager {
         player.sendMessage("You have joined the " + TeamManager.getTeam(player).getColoredName() + ChatColor.WHITE + " team!");
     }
     
+    /**
+     * Removes the player from their team.
+     *
+     * @param player The player to remove from their team.
+     */
     public static void leaveTeam(Player player) {
         Team team = TeamManager.getTeam(player);
         
@@ -48,9 +59,9 @@ public class TeamManager {
             player.sendMessage(ChatColor.RED + "You are not on a team.");
             return;
         }
-    
+        
         TeamColor teamColor = team.getTeamColor();
-    
+        
         switch (teamColor) {
             case RED:
                 red.removePlayer(player);
@@ -73,6 +84,12 @@ public class TeamManager {
         player.sendMessage("Removed you from the " + team.getColoredName() + ChatColor.WHITE + " team.");
     }
     
+    /**
+     * Returns the team that the player is currently on.
+     *
+     * @param player The player to get check.
+     * @return The team that the player is on.
+     */
     public static Team getTeam(Player player) {
         
         for (Team team : teams) {
@@ -85,6 +102,7 @@ public class TeamManager {
         return null;
     }
     
+    // TODO: can you add these when the list is created?
     public static void addTeamsToList() {
         teams.add(red);
         teams.add(yellow);

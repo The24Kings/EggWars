@@ -47,7 +47,10 @@ public class MiddleGenerator {
         this.world = world;
     }
     
-    private void spawnGenerator() {
+    /**
+     * Spawns the generator at the location specified in the {@link GeneratorManager#createGenerator(GeneratorType, Location) GeneratorManager.createGenerator}.
+     */
+    public void spawnGenerator() {
         calculateHeightMeasurements();
         calculateYawMeasurements();
         ArmorStand armorStand = (ArmorStand) world.spawnEntity(location, EntityType.ARMOR_STAND);
@@ -61,7 +64,10 @@ public class MiddleGenerator {
         doHoveringEffect(armorStand);
     }
     
-    private void startGenerator() {
+    /**
+     * Starts generating items.
+     */
+    public void startGenerator() {
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -70,6 +76,11 @@ public class MiddleGenerator {
         }.runTaskTimer(EggWars.getPlugin(), interval, interval);
     }
     
+    /**
+     * Makes the generator begin to move.
+     *
+     * @param armorStand The armor stand to move.
+     */
     private void doHoveringEffect(ArmorStand armorStand) {
         
         Location armorStandLocation = armorStand.getLocation();
@@ -94,6 +105,9 @@ public class MiddleGenerator {
         }.runTaskTimer(EggWars.getPlugin(), 0, 1);
     }
     
+    /**
+     * Runs the calculations for the rotation of the generator.
+     */
     private static void calculateYawMeasurements() {
         for (int i = 0; i < yawAmountOfIncrements / yawFrequency; i++) {
             
@@ -108,6 +122,9 @@ public class MiddleGenerator {
         
     }
     
+    /**
+     * Runs the calculations for the height movement of the generator.
+     */
     private static void calculateHeightMeasurements() {
         for (int i = 0; i < heightAmountOfIncrements / heightFrequency; i++) {
             
