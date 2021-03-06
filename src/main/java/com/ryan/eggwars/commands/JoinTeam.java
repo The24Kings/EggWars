@@ -24,13 +24,13 @@ public class JoinTeam implements CommandExecutor {
                 TeamManager.joinTeam(player, TeamColor.RED);
             } else if (args[0].equalsIgnoreCase("yellow")) {
                 TeamManager.joinTeam(player, TeamColor.YELLOW);
-    
+                
             } else if (args[0].equalsIgnoreCase("green")) {
                 TeamManager.joinTeam(player, TeamColor.GREEN);
-    
+                
             } else if (args[0].equalsIgnoreCase("blue")) {
                 TeamManager.joinTeam(player, TeamColor.BLUE);
-    
+                
             }
         }
         

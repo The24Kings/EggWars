@@ -13,8 +13,8 @@ public class JoinTeamTabCompleter implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         
         ArrayList<String> parameters = new ArrayList<>();
-    
-        for (TeamColor teamColor: TeamColor.values()) {
+        
+        for (TeamColor teamColor : TeamColor.values()) {
             parameters.add(teamColor.toString().toLowerCase());
         }
         

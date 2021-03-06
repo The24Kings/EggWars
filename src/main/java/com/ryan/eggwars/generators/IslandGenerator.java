@@ -13,7 +13,7 @@ public class IslandGenerator {
     public void startGenerator() {
         Random random = new Random();
         final int[] i = {0};
-    
+        
         new BukkitRunnable() {
             @Override
             public void run() {

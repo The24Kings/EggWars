@@ -8,9 +8,9 @@ description: idk a game for kings
 commands:
   join:
     description: Join a team.
-    
+  
   leave:
     description: Leaves your team.
-    
+  
   eggwars:
     description: Various commands for eggwars.

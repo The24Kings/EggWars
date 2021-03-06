@@ -17,7 +17,7 @@ public class GeneratorManager {
      * Creates a new generator and adds it to the corresponding list in {@link GeneratorManager}.
      *
      * @param generatorType The {@link GeneratorType} of the new generator.
-     * @param location The location that this generator will spawn at.
+     * @param location      The location that this generator will spawn at.
      */
     public static void createGenerator(GeneratorType generatorType, Location location) {
         switch (generatorType) {

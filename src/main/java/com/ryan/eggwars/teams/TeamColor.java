@@ -9,13 +9,13 @@ public enum TeamColor {
     GREEN(ChatColor.GREEN),
     BLUE(ChatColor.BLUE);
     
-    public ChatColor getChatColor() {
-        return chatColor;
-    }
-    
     private final ChatColor chatColor;
     
     TeamColor(ChatColor chatColor) {
         this.chatColor = chatColor;
+    }
+    
+    public ChatColor getChatColor() {
+        return chatColor;
     }
 }

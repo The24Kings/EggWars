@@ -41,7 +41,7 @@ public class OldItems {
         
         AttributeModifier modifier = new AttributeModifier(UUID.randomUUID(), "generic.attack_damage", damage, AttributeModifier.Operation.ADD_NUMBER);
         swordMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, modifier);
-
+        
         swordMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         swordMeta.setUnbreakable(true);
         sword.setItemMeta(swordMeta);

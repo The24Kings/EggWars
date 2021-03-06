@@ -17,13 +17,13 @@ public class CreateGenerator implements CommandExecutor {
                 
             } else if (args[0].equalsIgnoreCase("diamond")) {
                 GeneratorManager.createGenerator(GeneratorType.DIAMOND, ((Player) sender).getLocation());
-    
+                
             } else if (args[0].equalsIgnoreCase("emerald")) {
                 GeneratorManager.createGenerator(GeneratorType.EMERALD, ((Player) sender).getLocation());
-    
+                
             } else if (args[0].equalsIgnoreCase("amethyst")) {
                 GeneratorManager.createGenerator(GeneratorType.AMETHYST, ((Player) sender).getLocation());
-    
+                
             }
         }
         return true;

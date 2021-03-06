@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public class TeamManager {
     
+    private static final ArrayList<Team> teams = new ArrayList<>();
     public static Team red = new Team("Red", TeamColor.RED);
     public static Team yellow = new Team("Yellow", TeamColor.YELLOW);
     public static Team green = new Team("Green", TeamColor.GREEN);
     public static Team blue = new Team("Blue", TeamColor.BLUE);
-    private static final ArrayList<Team> teams = new ArrayList<>();
     
     /**
      * Adds the specified player to the specified team.
