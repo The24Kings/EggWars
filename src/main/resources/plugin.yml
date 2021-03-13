@@ -14,3 +14,9 @@ commands:
   
   eggwars:
     description: Various commands for eggwars.
+    
+  gen:
+    description: Creates a generator.
+    
+  eggtool:
+    description: Random tools.

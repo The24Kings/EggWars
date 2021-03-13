@@ -1,4 +1,4 @@
-package com.ryan.eggwars.chat;
+package com.ryan.eggwars.listeners;
 
 import com.ryan.eggwars.teams.Team;
 import com.ryan.eggwars.teams.TeamManager;
@@ -9,10 +9,9 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatFormatter implements Listener {
     
+    // TODO: Switch to paper's AsyncChatEvent if it ever decides to show up.
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {
-        System.out.println(event.getFormat());
-        
         ChatColor nameColor;
         Team team = TeamManager.getTeam(event.getPlayer());
         
@@ -22,9 +21,7 @@ public class ChatFormatter implements Listener {
             nameColor = ChatColor.GRAY;
         }
         
-        // TODO: make the color of the name represent their team's color
-        // Makes name colored, chat message white
-        event.setFormat(nameColor + "<%1$s>" + ChatColor.WHITE + "%2$s");
+        event.setFormat("<" + nameColor + "%1$s" +ChatColor.WHITE + "> %2$s");
     }
     
 }
