@@ -1,5 +1,6 @@
 package com.ryan.eggwars;
 
+import com.ryan.eggwars.gameplay.Setup;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,7 +13,7 @@ import org.bukkit.event.Listener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RandomTools implements Listener, CommandExecutor, TabCompleter {
+public class EggTools implements Listener, CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) return true;
@@ -26,6 +27,10 @@ public class RandomTools implements Listener, CommandExecutor, TabCompleter {
                     }
                 }
             }
+            
+            if (args[0].equalsIgnoreCase("cleareggs")) {
+                Setup.clearEggs();
+            }
         }
         
         return true;
@@ -36,6 +41,7 @@ public class RandomTools implements Listener, CommandExecutor, TabCompleter {
         ArrayList<String> parameters = new ArrayList<>();
     
         parameters.add("clearitems");
+        parameters.add("cleareggs");
     
         return parameters;
     }

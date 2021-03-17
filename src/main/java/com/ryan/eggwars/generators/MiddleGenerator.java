@@ -90,7 +90,6 @@ public class MiddleGenerator {
         calculateHeightMeasurements();
         calculateYawMeasurements();
         ArmorStand armorStand = (ArmorStand) world.spawnEntity(location, EntityType.ARMOR_STAND);
-        System.out.println("gen at " + location.toString());
         
         EntityEquipment entityEquipment = armorStand.getEquipment();
         entityEquipment.setHelmet(new ItemStack(displayItem));
@@ -132,7 +131,6 @@ public class MiddleGenerator {
      * Stops the generator.
      */
     public void stopGenerator() {
-        System.out.println("generator stopped");
         stoppedGen = true;
         genStand.remove();
         Bukkit.getScheduler().runTaskLater(EggWars.getPlugin(), () -> stoppedGen = false, 20);

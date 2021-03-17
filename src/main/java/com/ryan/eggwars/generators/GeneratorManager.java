@@ -27,21 +27,21 @@ public class GeneratorManager {
                 islandGenerators.add(islandGen);
                 islandGen.startGenerator();
                 break;
-                
+            
             case DIAMOND:
                 MiddleGenerator diamondGen = new MiddleGenerator(GeneratorType.DIAMOND, 15, location);
                 diamondGenerators.add(diamondGen);
                 diamondGen.spawnGenerator();
                 middleGenerators.add(diamondGen);
                 break;
-                
+            
             case EMERALD:
                 MiddleGenerator emeraldGen = new MiddleGenerator(GeneratorType.EMERALD, 30, location);
                 emeraldGenerators.add(emeraldGen);
                 emeraldGen.spawnGenerator();
                 middleGenerators.add(emeraldGen);
                 break;
-                
+            
             case AMETHYST:
                 MiddleGenerator amethystGen = new MiddleGenerator(GeneratorType.AMETHYST, 45, location);
                 amethystGenerator.add(amethystGen);
@@ -52,12 +52,22 @@ public class GeneratorManager {
     }
     
     public static void startGenerators() {
-        for (MiddleGenerator generator: middleGenerators) {
+        for (MiddleGenerator generator : middleGenerators) {
             generator.startGenerator();
         }
         
         for (IslandGenerator generator : islandGenerators) {
             generator.startGenerator();
+        }
+    }
+    
+    public static void stopGenerators() {
+        for (MiddleGenerator generator : middleGenerators) {
+            generator.stopGenerator();
+        }
+        
+        for (IslandGenerator generator : islandGenerators) {
+            generator.stopGenerator();
         }
     }
     
@@ -68,7 +78,7 @@ public class GeneratorManager {
         for (MiddleGenerator gen : diamondGenerators) {
             gen.stopGenerator();
         }
-    
+        
         for (MiddleGenerator gen : emeraldGenerators) {
             gen.stopGenerator();
         }
@@ -76,7 +86,7 @@ public class GeneratorManager {
         for (MiddleGenerator gen : amethystGenerator) {
             gen.stopGenerator();
         }
-    
+        
         for (IslandGenerator gen : islandGenerators) {
             gen.stopGenerator();
         }
@@ -89,6 +99,7 @@ public class GeneratorManager {
     
     /**
      * Gets all the {@link MiddleGenerator MiddleGenerators}.
+     *
      * @return An {@link ArrayList} of all the MiddleGenerators
      */
     public static ArrayList<MiddleGenerator> getMiddleGenerators() {
@@ -100,6 +111,7 @@ public class GeneratorManager {
     
     /**
      * Gets all the {@link IslandGenerator IslandGenerators}.
+     *
      * @return An {@link ArrayList} of all the IslandGenerators
      */
     public static ArrayList<IslandGenerator> getIslandGenerators() {
