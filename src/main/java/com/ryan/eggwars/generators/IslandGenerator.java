@@ -1,6 +1,7 @@
 package com.ryan.eggwars.generators;
 
 import com.ryan.eggwars.EggWars;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -19,12 +20,10 @@ public class IslandGenerator {
     
     public IslandGenerator(Location location) {
         this.world = location.getWorld();
-        
-        Location shiftedLocation = new Location(world,
+        this.location = new Location(world,
                 location.getBlockX() + 0.5,
                 location.getBlockY() + 1,
                 location.getBlockZ() + 0.5);
-        this.location = shiftedLocation;
     }
     
     /**
@@ -36,17 +35,14 @@ public class IslandGenerator {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (stoppedGen) {
-                    stoppedGen = false;
-                    cancel();
-                    System.out.println("stopped island gen");
-                }
-                if (random.nextInt(2) == 1) {
+                if (stoppedGen) cancel();
+                
+                if (random.nextInt(4) == 1) {
                     Item droppedItem = world.dropItem(location, new ItemStack(Material.IRON_INGOT));
                     droppedItem.setVelocity(new Vector(0, 0, 0));
                 }
                 
-                if (random.nextInt(10) == 1) {
+                if (random.nextInt(15) == 1) {
                     Item droppedItem = world.dropItem(location, new ItemStack(Material.GOLD_INGOT));
                     droppedItem.setVelocity(new Vector(0, 0, 0));
                 }
@@ -59,5 +55,6 @@ public class IslandGenerator {
      */
     public void stopGenerator() {
         stoppedGen = true;
+        Bukkit.getScheduler().runTaskLater(EggWars.getPlugin(), () -> stoppedGen = false, 20);
     }
 }

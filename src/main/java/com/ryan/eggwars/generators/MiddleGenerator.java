@@ -1,9 +1,7 @@
 package com.ryan.eggwars.generators;
 
 import com.ryan.eggwars.EggWars;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -16,12 +14,17 @@ import java.util.ArrayList;
 
 public class MiddleGenerator {
     
+    private final GeneratorType generatorType;
     private final ItemStack itemType;
-    private final Material displayItem;
+    private final ItemStack displayItem;
     private final int interval;
+    private final int intervalSeconds;
     private final Location location;
+    private Location dropLocation;
     private final World world;
     private ArmorStand genStand;
+    private ArmorStand mainText;
+    private ArmorStand secondaryText;
     private boolean stoppedGen = false;
     
     // numbers for calculating the yaw
@@ -45,16 +48,39 @@ public class MiddleGenerator {
     private double originalHeight;
     private static final ArrayList<Double> heightMeasurements = new ArrayList<>();
     
-    public MiddleGenerator(Material itemType, Material displayItem, int interval, Location location) {
-        this.itemType = new ItemStack(itemType);
-        this.interval = interval * 20;
+    public MiddleGenerator(GeneratorType generatorType, int intervalSeconds, Location location) {
+        switch (generatorType) {
+            case DIAMOND:
+                this.itemType = new ItemStack(Material.DIAMOND);
+                this.displayItem = new ItemStack(Material.DIAMOND_BLOCK);
+                break;
+                
+            case EMERALD:
+                this.itemType = new ItemStack(Material.EMERALD);
+                this.displayItem = new ItemStack(Material.EMERALD_BLOCK);
+                break;
+            case AMETHYST:
+                this.itemType = new ItemStack(Material.PURPLE_DYE);
+                this.displayItem = new ItemStack(Material.PURPLE_CONCRETE);
+                break;
+                
+            default:
+                this.itemType = new ItemStack(Material.STONE);
+                this.displayItem = new ItemStack(Material.STONE);
+        }
+        
+        this.generatorType = generatorType;
+        this.interval = intervalSeconds * 20;
+        this.intervalSeconds = intervalSeconds;
         this.world = location.getWorld();
-        this.displayItem = displayItem;
-        Location shiftedLocation = new Location(world,
+        this.location = new Location(world,
                 location.getBlockX() + 0.5,
-                location.getBlockY(),
+                location.getBlockY() + 0.5,
                 location.getBlockZ() + 0.5);
-        this.location = shiftedLocation;
+        this.dropLocation = new Location(world,
+                location.getBlockX() + 0.5,
+                location.getBlockY() + 1,
+                location.getBlockZ() + 0.5);
     }
     
     /**
@@ -64,6 +90,7 @@ public class MiddleGenerator {
         calculateHeightMeasurements();
         calculateYawMeasurements();
         ArmorStand armorStand = (ArmorStand) world.spawnEntity(location, EntityType.ARMOR_STAND);
+        System.out.println("gen at " + location.toString());
         
         EntityEquipment entityEquipment = armorStand.getEquipment();
         entityEquipment.setHelmet(new ItemStack(displayItem));
@@ -80,18 +107,25 @@ public class MiddleGenerator {
      */
     public void startGenerator() {
         
+        doCountdown();
+        
         new BukkitRunnable() {
+            
+            int i = 0;
+            
             @Override
             public void run() {
-                if (stoppedGen) {
-                    stoppedGen = false;
-                    cancel();
+                if (stoppedGen) cancel();
+                
+                if (i > interval) i = 0;
+                
+                if (i == interval) {
+                    Item droppedItem = world.dropItem(dropLocation, itemType);
+                    droppedItem.setVelocity(new Vector(0, 0, 0));
                 }
-    
-                Item droppedItem = world.dropItem(location, itemType);
-                droppedItem.setVelocity(new Vector(0, 0, 0));
+                i++;
             }
-        }.runTaskTimer(EggWars.getPlugin(), interval, interval);
+        }.runTaskTimer(EggWars.getPlugin(), 1, 1);
     }
     
     /**
@@ -101,6 +135,67 @@ public class MiddleGenerator {
         System.out.println("generator stopped");
         stoppedGen = true;
         genStand.remove();
+        Bukkit.getScheduler().runTaskLater(EggWars.getPlugin(), () -> stoppedGen = false, 20);
+    }
+    
+    private void doCountdown() {
+        
+        Location textLocation = location;
+        textLocation.setY(textLocation.getY() + 3.5);
+        mainText = (ArmorStand) world.spawnEntity(textLocation, EntityType.ARMOR_STAND);
+        
+        textLocation.setY(textLocation.getY() - 0.3);
+        secondaryText = (ArmorStand) world.spawnEntity(textLocation, EntityType.ARMOR_STAND);
+        
+        mainText.setCustomNameVisible(true);
+        mainText.setMarker(true);
+        mainText.setGravity(false);
+        mainText.setVisible(false);
+        
+        secondaryText.setCustomNameVisible(true);
+        secondaryText.setMarker(true);
+        secondaryText.setGravity(false);
+        secondaryText.setVisible(false);
+        
+        switch (generatorType) {
+            case DIAMOND:
+                mainText.setCustomName(ChatColor.AQUA + "Diamond Generator");
+                break;
+            
+            case EMERALD:
+                mainText.setCustomName(ChatColor.GREEN + "Emerald Generator");
+                break;
+                
+            case AMETHYST:
+                mainText.setCustomName(ChatColor.LIGHT_PURPLE + "Amethyst Generator");
+                break;
+                
+            default:
+                mainText.setCustomName("something went wrong");
+        }
+        
+        
+        new BukkitRunnable() {
+            
+            int timeRemaining = 0;
+    
+            @Override
+            public void run() {
+                if (stoppedGen) {
+                    mainText.remove();
+                    secondaryText.remove();
+                    cancel();
+                }
+                
+                if (timeRemaining == 0) {
+                    timeRemaining = intervalSeconds;
+                }
+                
+                secondaryText.setCustomName(ChatColor.YELLOW + "Time Remaining: " + timeRemaining);
+                
+                timeRemaining--;
+            }
+        }.runTaskTimer(EggWars.getPlugin(), 0, 20);
     }
     
     /**

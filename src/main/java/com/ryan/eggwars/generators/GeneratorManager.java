@@ -1,7 +1,6 @@
 package com.ryan.eggwars.generators;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 
 import java.util.ArrayList;
 
@@ -10,6 +9,7 @@ public class GeneratorManager {
     private static final ArrayList<MiddleGenerator> diamondGenerators = new ArrayList<>();
     private static final ArrayList<MiddleGenerator> emeraldGenerators = new ArrayList<>();
     private static final ArrayList<MiddleGenerator> amethystGenerator = new ArrayList<>();
+    private static final ArrayList<MiddleGenerator> middleGenerators = new ArrayList<>();
     
     private static final ArrayList<IslandGenerator> islandGenerators = new ArrayList<>();
     
@@ -27,27 +27,43 @@ public class GeneratorManager {
                 islandGenerators.add(islandGen);
                 islandGen.startGenerator();
                 break;
+                
             case DIAMOND:
-                MiddleGenerator diamondGen = new MiddleGenerator(Material.DIAMOND, Material.DIAMOND_BLOCK, 15, location);
+                MiddleGenerator diamondGen = new MiddleGenerator(GeneratorType.DIAMOND, 15, location);
                 diamondGenerators.add(diamondGen);
                 diamondGen.spawnGenerator();
-                diamondGen.startGenerator();
+                middleGenerators.add(diamondGen);
                 break;
+                
             case EMERALD:
-                MiddleGenerator emeraldGen = new MiddleGenerator(Material.EMERALD, Material.EMERALD_BLOCK, 30, location);
+                MiddleGenerator emeraldGen = new MiddleGenerator(GeneratorType.EMERALD, 30, location);
                 emeraldGenerators.add(emeraldGen);
                 emeraldGen.spawnGenerator();
-                emeraldGen.startGenerator();
+                middleGenerators.add(emeraldGen);
                 break;
+                
             case AMETHYST:
-                MiddleGenerator amethystGen = new MiddleGenerator(Material.PURPLE_DYE, Material.PURPLE_CONCRETE, 45, location);
+                MiddleGenerator amethystGen = new MiddleGenerator(GeneratorType.AMETHYST, 45, location);
                 amethystGenerator.add(amethystGen);
                 amethystGen.spawnGenerator();
-                amethystGen.startGenerator();
+                middleGenerators.add(amethystGen);
                 break;
         }
     }
     
+    public static void startGenerators() {
+        for (MiddleGenerator generator: middleGenerators) {
+            generator.startGenerator();
+        }
+        
+        for (IslandGenerator generator : islandGenerators) {
+            generator.startGenerator();
+        }
+    }
+    
+    /**
+     * Destroy all existing generators.
+     */
     public static void clearAllGenerators() {
         for (MiddleGenerator gen : diamondGenerators) {
             gen.stopGenerator();
@@ -69,5 +85,24 @@ public class GeneratorManager {
         emeraldGenerators.clear();
         amethystGenerator.clear();
         islandGenerators.clear();
+    }
+    
+    /**
+     * Gets all the {@link MiddleGenerator MiddleGenerators}.
+     * @return An {@link ArrayList} of all the MiddleGenerators
+     */
+    public static ArrayList<MiddleGenerator> getMiddleGenerators() {
+        ArrayList<MiddleGenerator> generators = diamondGenerators;
+        generators.addAll(emeraldGenerators);
+        generators.addAll(amethystGenerator);
+        return generators;
+    }
+    
+    /**
+     * Gets all the {@link IslandGenerator IslandGenerators}.
+     * @return An {@link ArrayList} of all the IslandGenerators
+     */
+    public static ArrayList<IslandGenerator> getIslandGenerators() {
+        return islandGenerators;
     }
 }

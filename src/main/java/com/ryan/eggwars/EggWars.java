@@ -5,9 +5,14 @@ import com.ryan.eggwars.listeners.ChatFormatter;
 import com.ryan.eggwars.oldmechanics.AttackCooldown;
 import com.ryan.eggwars.oldmechanics.PearlCooldown;
 import com.ryan.eggwars.teams.TeamManager;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class EggWars extends JavaPlugin {
+    
+    public static World world = Bukkit.getWorld("eggwars");
     
     private static EggWars plugin;
     
@@ -17,6 +22,10 @@ public final class EggWars extends JavaPlugin {
     
     @Override
     public void onEnable() {
+        
+        if (world == null) {
+            System.out.println(ChatColor.RED + "PLEASE NAME THE WORLD TO 'eggwars'");
+        }
         
         registerEvents();
         TeamManager.addTeamsToList();
