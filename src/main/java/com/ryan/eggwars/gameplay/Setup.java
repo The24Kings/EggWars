@@ -13,18 +13,19 @@ public class Setup {
     private static final ArrayList<Location> diamondGenSpawnpoints = new ArrayList<>();
     private static final ArrayList<Location> emeraldGenSpawnpoints = new ArrayList<>();
     private static final ArrayList<Location> amethystGenSpawnpoints = new ArrayList<>();
+    private static final ArrayList<Location> islandGenSpawnponits = new ArrayList<>();
     
     private static final ArrayList<Location> eggSpawnpoints = new ArrayList<>();
     
     public static void onPluginStart() {
         createGeneratorSpawns();
         createEggSpawns();
-        spawnGenerators();
     }
     
     public static void onGameStart() {
-        GeneratorManager.startGenerators();
+        spawnGenerators();
         spawnEggs();
+        GeneratorManager.startGenerators();
     }
     
     private static void spawnEggs() {
@@ -46,6 +47,8 @@ public class Setup {
         eggSpawnpoints.add(new Location(EggWars.world, -41, 101, 0));
     }
     
+    
+    // TODO: island generators
     private static void spawnGenerators() {
     
         for (Location location : diamondGenSpawnpoints) {
@@ -61,6 +64,7 @@ public class Setup {
         }
     }
     
+    // TODO: island generators
     private static void createGeneratorSpawns() {
         diamondGenSpawnpoints.add(new Location(EggWars.world, 50, 101, 50));
         diamondGenSpawnpoints.add(new Location(EggWars.world, 50, 101, -50));

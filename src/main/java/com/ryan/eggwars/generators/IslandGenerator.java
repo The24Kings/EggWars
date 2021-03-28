@@ -53,8 +53,9 @@ public class IslandGenerator {
     /**
      * Stops the generator.
      */
-    public void stopGenerator() {
+    public void stopGenerator(boolean isDisabling) {
+        if (isDisabling) return;
         stoppedGen = true;
-        Bukkit.getScheduler().runTaskLater(EggWars.getPlugin(), () -> stoppedGen = false, 20);
+        Bukkit.getScheduler().runTaskLater(EggWars.getPlugin(), () -> stoppedGen = false, 10);
     }
 }

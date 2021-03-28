@@ -31,7 +31,7 @@ public class CreateGenerator implements CommandExecutor {
                 
             } else if (args[0].equalsIgnoreCase("clear")) {
                 System.out.println("clear command sent");
-                GeneratorManager.clearAllGenerators();
+                GeneratorManager.clearAllGenerators(false);
             }
         }
         return true;

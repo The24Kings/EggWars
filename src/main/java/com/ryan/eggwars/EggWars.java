@@ -1,8 +1,8 @@
 package com.ryan.eggwars;
 
 import com.ryan.eggwars.commands.*;
+import com.ryan.eggwars.gameplay.Cleanup;
 import com.ryan.eggwars.gameplay.Setup;
-import com.ryan.eggwars.generators.GeneratorManager;
 import com.ryan.eggwars.listeners.ChatFormatter;
 import com.ryan.eggwars.listeners.OnEggPunch;
 import com.ryan.eggwars.oldmechanics.AttackCooldown;
@@ -43,8 +43,7 @@ public final class EggWars extends JavaPlugin {
     
     @Override
     public void onDisable() {
-        GeneratorManager.clearAllGenerators();
-        Setup.clearEggs();
+        Cleanup.onPluginStop();
     }
     
     private void registerEvents() {
@@ -66,7 +65,7 @@ public final class EggWars extends JavaPlugin {
         getCommand("eggtool").setExecutor(new EggTools());
         getCommand("eggtool").setTabCompleter(new EggTools());
         
-        getCommand("eggwars").setExecutor(new StartGame());
+        getCommand("eggwars").setExecutor(new StartAndStopGame());
     }
     
 }

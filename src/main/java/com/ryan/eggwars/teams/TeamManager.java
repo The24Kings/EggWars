@@ -1,5 +1,6 @@
 package com.ryan.eggwars.teams;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -43,7 +44,9 @@ public class TeamManager {
                 break;
         }
         
-        player.setDisplayName(teamColor.getChatColor() + player.getName());
+        Component name = Component.text(teamColor.getChatColor() + player.getName());
+        player.displayName(name);
+        player.playerListName(name);
         player.sendMessage("You have joined the " + TeamManager.getTeam(player).getColoredName() + ChatColor.WHITE + " team!");
     }
     
@@ -80,7 +83,9 @@ public class TeamManager {
                 break;
         }
         
-        player.setDisplayName(player.getName());
+        Component name = Component.text(player.getName());
+        player.displayName(name);
+        player.playerListName(name);
         player.sendMessage("Removed you from the " + team.getColoredName() + ChatColor.WHITE + " team.");
     }
     
@@ -98,7 +103,6 @@ public class TeamManager {
                 return team;
             }
         }
-        
         return null;
     }
     

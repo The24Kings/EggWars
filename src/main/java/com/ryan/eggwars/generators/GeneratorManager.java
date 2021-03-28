@@ -61,36 +61,20 @@ public class GeneratorManager {
         }
     }
     
-    public static void stopGenerators() {
-        for (MiddleGenerator generator : middleGenerators) {
-            generator.stopGenerator();
-        }
-        
-        for (IslandGenerator generator : islandGenerators) {
-            generator.stopGenerator();
-        }
-    }
-    
     /**
      * Destroy all existing generators.
      */
-    public static void clearAllGenerators() {
-        for (MiddleGenerator gen : diamondGenerators) {
-            gen.stopGenerator();
-        }
+    public static void clearAllGenerators(boolean isDisabling) {
         
-        for (MiddleGenerator gen : emeraldGenerators) {
-            gen.stopGenerator();
-        }
-        
-        for (MiddleGenerator gen : amethystGenerator) {
-            gen.stopGenerator();
+        for (MiddleGenerator gen : middleGenerators) {
+            gen.stopGenerator(isDisabling);
         }
         
         for (IslandGenerator gen : islandGenerators) {
-            gen.stopGenerator();
+            gen.stopGenerator(isDisabling);
         }
         
+        middleGenerators.clear();
         diamondGenerators.clear();
         emeraldGenerators.clear();
         amethystGenerator.clear();

@@ -130,10 +130,17 @@ public class MiddleGenerator {
     /**
      * Stops the generator.
      */
-    public void stopGenerator() {
-        stoppedGen = true;
+    public void stopGenerator(boolean isDisabling) {
+    
         genStand.remove();
-        Bukkit.getScheduler().runTaskLater(EggWars.getPlugin(), () -> stoppedGen = false, 20);
+        mainText.remove();
+        secondaryText.remove();
+    
+        // gens will stop on their own
+        if (!isDisabling) {
+            stoppedGen = true;
+            Bukkit.getScheduler().runTaskLater(EggWars.getPlugin(), () -> stoppedGen = false, 20);
+        }
     }
     
     private void doCountdown() {
