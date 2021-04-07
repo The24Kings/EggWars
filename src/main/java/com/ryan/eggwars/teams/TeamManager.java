@@ -48,7 +48,7 @@ public class TeamManager {
         Component name = Component.text(teamColor.getChatColor() + player.getName());
         player.displayName(name);
         player.playerListName(name);
-        player.sendMessage("You have joined the " + TeamManager.getTeam(player).getColoredName() + ChatColor.WHITE + " team!");
+        player.sendMessage("You have joined the " + TeamManager.getTeam(player).getBoldedName() + ChatColor.RESET + " team!");
     }
     
     /**
@@ -87,7 +87,7 @@ public class TeamManager {
         Component name = Component.text(player.getName());
         player.displayName(name);
         player.playerListName(name);
-        player.sendMessage("Removed you from the " + team.getColoredName() + ChatColor.WHITE + " team.");
+        player.sendMessage("Removed you from the " + team.getBoldedName() + ChatColor.RESET + " team.");
     }
     
     /**

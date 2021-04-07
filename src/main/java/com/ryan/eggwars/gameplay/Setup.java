@@ -13,7 +13,7 @@ public class Setup {
     private static final ArrayList<Location> diamondGenSpawnpoints = new ArrayList<>();
     private static final ArrayList<Location> emeraldGenSpawnpoints = new ArrayList<>();
     private static final ArrayList<Location> amethystGenSpawnpoints = new ArrayList<>();
-    private static final ArrayList<Location> islandGenSpawnponits = new ArrayList<>();
+    private static final ArrayList<Location> islandGenSpawnpoints = new ArrayList<>();
     
     private static final ArrayList<Location> eggSpawnpoints = new ArrayList<>();
     
@@ -35,6 +35,7 @@ public class Setup {
     }
     
     public static void clearEggs() {
+        if (eggSpawnpoints.isEmpty()) return;
         for (Location location : eggSpawnpoints) {
             location.getBlock().setType(Material.AIR);
         }
@@ -62,7 +63,7 @@ public class Setup {
             GeneratorManager.createGenerator(GeneratorType.AMETHYST, location);
         }
         
-        for (Location location : islandGenSpawnponits) {
+        for (Location location : islandGenSpawnpoints) {
             GeneratorManager.createGenerator(GeneratorType.ISLAND, location);
         }
     }
@@ -84,9 +85,9 @@ public class Setup {
         amethystGenSpawnpoints.add(new Location(EggWars.world, 15, 91, -15));
         amethystGenSpawnpoints.add(new Location(EggWars.world, -15, 91, -15));
         
-        islandGenSpawnponits.add(new Location(EggWars.world, 0, 101, 55));
-        islandGenSpawnponits.add(new Location(EggWars.world, 0, 101, -55));
-        islandGenSpawnponits.add(new Location(EggWars.world, 55, 101, 0));
-        islandGenSpawnponits.add(new Location(EggWars.world, -55, 101, 0));
+        islandGenSpawnpoints.add(new Location(EggWars.world, 0, 101, 55));
+        islandGenSpawnpoints.add(new Location(EggWars.world, 0, 101, -55));
+        islandGenSpawnpoints.add(new Location(EggWars.world, 55, 101, 0));
+        islandGenSpawnpoints.add(new Location(EggWars.world, -55, 101, 0));
     }
 }

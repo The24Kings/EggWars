@@ -74,6 +74,15 @@ public class Team {
     }
     
     /**
+     * Returns the name of the team with the {@link ChatColor} and bold added.
+     *
+     * @return The colored named of the team.
+     */
+    public String getBoldedName() {
+        return teamColor.getChatColor() + "" + ChatColor.BOLD + name;
+    }
+    
+    /**
      * Returns all the players on the team.
      *
      * @return List of the UUIDs of the players on the team.
