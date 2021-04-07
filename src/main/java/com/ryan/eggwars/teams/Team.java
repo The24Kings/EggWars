@@ -1,6 +1,7 @@
 package com.ryan.eggwars.teams;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -33,6 +34,25 @@ public class Team {
      */
     public ChatColor getChatColor() {
         return teamColor.getChatColor();
+    }
+    
+    /**
+     * Returns the team's corresponding wool color
+     * @return The {@link Material} of the corresponding wool.
+     */
+    public Material getWool() {
+        switch (teamColor) {
+            case RED:
+                return Material.RED_WOOL;
+            case BLUE:
+                return Material.BLUE_WOOL;
+            case GREEN:
+                return Material.LIME_WOOL;
+            case YELLOW:
+                return Material.YELLOW_WOOL;
+            default:
+                return null;
+        }
     }
     
     /**

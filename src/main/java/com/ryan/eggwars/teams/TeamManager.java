@@ -2,6 +2,7 @@ package com.ryan.eggwars.teams;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -103,6 +104,36 @@ public class TeamManager {
             }
         }
         return null;
+    }
+    
+    public static Team getTeam(TeamColor teamColor) {
+        switch (teamColor) {
+            case RED:
+                return red;
+            case BLUE:
+                return blue;
+            case GREEN:
+                return green;
+            case YELLOW:
+                return yellow;
+            default:
+                return null;
+        }
+    }
+    
+    public static Team getTeam(Material wool) {
+        switch (wool) {
+            case RED_WOOL:
+                return red;
+            case BLUE_WOOL:
+                return blue;
+            case LIME_WOOL:
+                return green;
+            case YELLOW_WOOL:
+                return yellow;
+            default:
+                return null;
+        }
     }
     
     public static void addTeamsToList() {

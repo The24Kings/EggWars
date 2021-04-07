@@ -19,7 +19,7 @@ public class IslandGenerator {
     private final World world;
     // higher = less likely
     private final int ironChance = 4;
-    private final int goldChance = 15;
+    private final int goldChance = 20;
     
     public IslandGenerator(Location location) {
         this.world = location.getWorld();
