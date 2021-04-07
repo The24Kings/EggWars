@@ -48,7 +48,6 @@ public class Setup {
     }
     
     
-    // TODO: island generators
     private static void spawnGenerators() {
     
         for (Location location : diamondGenSpawnpoints) {
@@ -62,9 +61,12 @@ public class Setup {
         for (Location location : amethystGenSpawnpoints) {
             GeneratorManager.createGenerator(GeneratorType.AMETHYST, location);
         }
+        
+        for (Location location : islandGenSpawnponits) {
+            GeneratorManager.createGenerator(GeneratorType.ISLAND, location);
+        }
     }
     
-    // TODO: island generators
     private static void createGeneratorSpawns() {
         diamondGenSpawnpoints.add(new Location(EggWars.world, 50, 101, 50));
         diamondGenSpawnpoints.add(new Location(EggWars.world, 50, 101, -50));
@@ -81,6 +83,10 @@ public class Setup {
         amethystGenSpawnpoints.add(new Location(EggWars.world, -15, 91, 15));
         amethystGenSpawnpoints.add(new Location(EggWars.world, 15, 91, -15));
         amethystGenSpawnpoints.add(new Location(EggWars.world, -15, 91, -15));
-    
+        
+        islandGenSpawnponits.add(new Location(EggWars.world, 0, 101, 55));
+        islandGenSpawnponits.add(new Location(EggWars.world, 0, 101, -55));
+        islandGenSpawnponits.add(new Location(EggWars.world, 55, 101, 0));
+        islandGenSpawnponits.add(new Location(EggWars.world, -55, 101, 0));
     }
 }

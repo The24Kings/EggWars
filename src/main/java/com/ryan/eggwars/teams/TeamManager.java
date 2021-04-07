@@ -99,14 +99,12 @@ public class TeamManager {
         
         for (Team team : teams) {
             if (team.containsPlayer(player)) {
-                // TODO: do the thing
                 return team;
             }
         }
         return null;
     }
     
-    // TODO: can you add these when the list is created?
     public static void addTeamsToList() {
         teams.add(red);
         teams.add(yellow);

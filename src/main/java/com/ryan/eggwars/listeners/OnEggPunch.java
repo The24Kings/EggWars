@@ -1,6 +1,6 @@
 package com.ryan.eggwars.listeners;
 
-import com.ryan.eggwars.gameplay.Gameplay;
+import com.ryan.eggwars.gameplay.CaptureEgg;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +14,7 @@ public class OnEggPunch implements Listener {
         
         if (event.getClickedBlock().getType() == Material.DRAGON_EGG) {
             event.setCancelled(true);
-            Gameplay.handleEggWasPunched(event.getPlayer());
+            CaptureEgg.handleEggWasPunched(event.getPlayer(), event.getClickedBlock());
         }
     }
     

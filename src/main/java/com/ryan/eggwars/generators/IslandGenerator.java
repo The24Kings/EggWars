@@ -17,6 +17,9 @@ public class IslandGenerator {
     private boolean stoppedGen = false;
     private final Location location;
     private final World world;
+    // higher = less likely
+    private final int ironChance = 4;
+    private final int goldChance = 15;
     
     public IslandGenerator(Location location) {
         this.world = location.getWorld();
@@ -37,12 +40,12 @@ public class IslandGenerator {
             public void run() {
                 if (stoppedGen) cancel();
                 
-                if (random.nextInt(4) == 1) {
+                if (random.nextInt(ironChance) == 1) {
                     Item droppedItem = world.dropItem(location, new ItemStack(Material.IRON_INGOT));
                     droppedItem.setVelocity(new Vector(0, 0, 0));
                 }
                 
-                if (random.nextInt(15) == 1) {
+                if (random.nextInt(goldChance) == 1) {
                     Item droppedItem = world.dropItem(location, new ItemStack(Material.GOLD_INGOT));
                     droppedItem.setVelocity(new Vector(0, 0, 0));
                 }
