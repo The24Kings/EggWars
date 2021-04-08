@@ -2,6 +2,7 @@ package com.ryan.eggwars.teams;
 
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -10,13 +11,17 @@ import java.util.UUID;
 
 public class Team {
     
+    public ArrayList<Location> nestLocations = new ArrayList<>();
+    private final Location eggSpawn;
     private final String name;
     private final TeamColor teamColor;
     private final ArrayList<UUID> players = new ArrayList<>();
+    private Team lastSeenEggLocation = this;
     
-    public Team(String name, TeamColor teamColor) {
+    public Team(String name, TeamColor teamColor, Location eggSpawn) {
         this.name = name;
         this.teamColor = teamColor;
+        this.eggSpawn = eggSpawn;
     }
     
     /**
@@ -147,6 +152,52 @@ public class Team {
      */
     public void removePlayer(Player player) {
         players.remove(player.getUniqueId());
+    }
+    
+    /**
+     * Sets the {@link Team} that last had this teams egg.
+     * @param team The {@link Team} that last had the egg.
+     */
+    public void setLastSeenEggLocation(Team team) {
+        lastSeenEggLocation = team;
+    }
+    
+    /**
+     * Gets the {@link Team} that last had the egg.
+     * @return The {@link Team} that last had the egg.
+     */
+    public Team getLastSeenEggLocation() {
+        return lastSeenEggLocation;
+    }
+    
+    /**
+     * Gets the original spawn location of this team's egg.
+     * @return The original {@link Location} of this teams egg.
+     */
+    public Location getEggSpawn() {
+        return eggSpawn;
+    }
+    
+    /**
+     * Spawns this team's egg.
+     */
+    public void spawnEgg() {
+        eggSpawn.getBlock().setType(Material.DRAGON_EGG);
+    }
+    
+    /**
+     * Despawns this team's egg
+     */
+    public void despawnEgg() {
+        eggSpawn.getBlock().setType(Material.AIR);
+    }
+    
+    public void clearNest() {
+        for (Location location : nestLocations) {
+            if (location.getBlock().getType() == Material.DRAGON_EGG) {
+                location.getBlock().setType(Material.AIR);
+            }
+        }
     }
 }
 

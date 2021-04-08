@@ -1,7 +1,9 @@
 package com.ryan.eggwars.teams;
 
+import com.ryan.eggwars.EggWars;
 import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -9,11 +11,11 @@ import java.util.ArrayList;
 
 public class TeamManager {
     
-    private static final ArrayList<Team> teams = new ArrayList<>();
-    public static Team red = new Team("Red", TeamColor.RED);
-    public static Team yellow = new Team("Yellow", TeamColor.YELLOW);
-    public static Team green = new Team("Green", TeamColor.GREEN);
-    public static Team blue = new Team("Blue", TeamColor.BLUE);
+    public static final ArrayList<Team> teams = new ArrayList<>();
+    public static Team red = new Team("Red", TeamColor.RED, new Location(EggWars.world, -41, 101, 0));
+    public static Team yellow = new Team("Yellow", TeamColor.YELLOW, new Location(EggWars.world, 0, 101, 41));
+    public static Team green = new Team("Green", TeamColor.GREEN, new Location(EggWars.world, 41, 101, 0));
+    public static Team blue = new Team("Blue", TeamColor.BLUE, new Location(EggWars.world, 0, 101, -41));
     
     /**
      * Adds the specified player to the specified team.

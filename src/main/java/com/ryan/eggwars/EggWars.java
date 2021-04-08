@@ -4,7 +4,7 @@ import com.ryan.eggwars.commands.*;
 import com.ryan.eggwars.gameplay.Cleanup;
 import com.ryan.eggwars.gameplay.Setup;
 import com.ryan.eggwars.listeners.ChatFormatter;
-import com.ryan.eggwars.listeners.OnEggPunch;
+import com.ryan.eggwars.listeners.EggEvents;
 import com.ryan.eggwars.oldmechanics.AttackCooldown;
 import com.ryan.eggwars.oldmechanics.CancelDroppingEgg;
 import com.ryan.eggwars.oldmechanics.DisableOffhand;
@@ -56,7 +56,7 @@ public final class EggWars extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CancelDroppingEgg(), this);
         getServer().getPluginManager().registerEvents(new Testing(), this);
         getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
-        getServer().getPluginManager().registerEvents(new OnEggPunch(), this);
+        getServer().getPluginManager().registerEvents(new EggEvents(), this);
         
         getCommand("join").setExecutor(new JoinTeam());
         getCommand("join").setTabCompleter(new JoinTeamTabCompleter());

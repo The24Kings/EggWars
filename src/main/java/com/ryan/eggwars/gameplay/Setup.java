@@ -3,8 +3,9 @@ package com.ryan.eggwars.gameplay;
 import com.ryan.eggwars.EggWars;
 import com.ryan.eggwars.generators.GeneratorManager;
 import com.ryan.eggwars.generators.GeneratorType;
+import com.ryan.eggwars.teams.Team;
+import com.ryan.eggwars.teams.TeamManager;
 import org.bukkit.Location;
-import org.bukkit.Material;
 
 import java.util.ArrayList;
 
@@ -15,11 +16,27 @@ public class Setup {
     private static final ArrayList<Location> amethystGenSpawnpoints = new ArrayList<>();
     private static final ArrayList<Location> islandGenSpawnpoints = new ArrayList<>();
     
-    private static final ArrayList<Location> eggSpawnpoints = new ArrayList<>();
-    
     public static void onPluginStart() {
         createGeneratorSpawns();
-        createEggSpawns();
+        createNestLocations();
+    }
+    
+    private static void createNestLocations() {
+        TeamManager.red.nestLocations.add(new Location(EggWars.world, -60, 105, 0));
+        TeamManager.red.nestLocations.add(new Location(EggWars.world, -62, 105, -1));
+        TeamManager.red.nestLocations.add(new Location(EggWars.world, -62, 105, 1));
+    
+        TeamManager.blue.nestLocations.add(new Location(EggWars.world, 0, 105, -60));
+        TeamManager.blue.nestLocations.add(new Location(EggWars.world, -1, 105, -62));
+        TeamManager.blue.nestLocations.add(new Location(EggWars.world, 1, 105, -62));
+    
+        TeamManager.yellow.nestLocations.add(new Location(EggWars.world, 60, 105, 0));
+        TeamManager.yellow.nestLocations.add(new Location(EggWars.world, 62, 105, -1));
+        TeamManager.yellow.nestLocations.add(new Location(EggWars.world, 62, 105, 1));
+    
+        TeamManager.green.nestLocations.add(new Location(EggWars.world, 0, 105, 60));
+        TeamManager.green.nestLocations.add(new Location(EggWars.world, 1, 105, 62));
+        TeamManager.green.nestLocations.add(new Location(EggWars.world, -1, 105, 62));
     }
     
     public static void onGameStart() {
@@ -29,23 +46,20 @@ public class Setup {
     }
     
     private static void spawnEggs() {
-        for (Location location : eggSpawnpoints) {
-            location.getBlock().setType(Material.DRAGON_EGG);
+        for (Team team : TeamManager.teams) {
+            team.spawnEgg();
         }
     }
     
     public static void clearEggs() {
-        if (eggSpawnpoints.isEmpty()) return;
-        for (Location location : eggSpawnpoints) {
-            location.getBlock().setType(Material.AIR);
+        if (TeamManager.teams.isEmpty()) return;
+        for (Team team : TeamManager.teams) {
+            team.despawnEgg();
         }
-    }
     
-    private static void createEggSpawns() {
-        eggSpawnpoints.add(new Location(EggWars.world, 0, 101, 41));
-        eggSpawnpoints.add(new Location(EggWars.world, 0, 101, -41));
-        eggSpawnpoints.add(new Location(EggWars.world, 41, 101, 0));
-        eggSpawnpoints.add(new Location(EggWars.world, -41, 101, 0));
+        for (Team team: TeamManager.teams) {
+            team.clearNest();
+        }
     }
     
     

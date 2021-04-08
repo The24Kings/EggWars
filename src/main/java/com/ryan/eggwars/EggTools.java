@@ -1,5 +1,6 @@
 package com.ryan.eggwars;
 
+import com.ryan.eggwars.gameplay.CaptureEgg;
 import com.ryan.eggwars.gameplay.Setup;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,10 +27,13 @@ public class EggTools implements Listener, CommandExecutor, TabCompleter {
                         entity.remove();
                     }
                 }
-            }
-            
-            if (args[0].equalsIgnoreCase("cleareggs")) {
+            } else if (args[0].equalsIgnoreCase("cleareggs")) {
                 Setup.clearEggs();
+            } else if (args[0].equalsIgnoreCase("lists")) {
+                player.sendMessage("PICKED UP");
+                player.sendMessage(CaptureEgg.pickedUpEggs.toString());
+                player.sendMessage("CAPTURED");
+                player.sendMessage(CaptureEgg.capturedEggs.toString());
             }
         }
         
@@ -42,6 +46,7 @@ public class EggTools implements Listener, CommandExecutor, TabCompleter {
     
         parameters.add("clearitems");
         parameters.add("cleareggs");
+        parameters.add("lists");
     
         return parameters;
     }
