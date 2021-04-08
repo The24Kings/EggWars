@@ -6,6 +6,8 @@ import com.ryan.eggwars.gameplay.Setup;
 import com.ryan.eggwars.listeners.ChatFormatter;
 import com.ryan.eggwars.listeners.OnEggPunch;
 import com.ryan.eggwars.oldmechanics.AttackCooldown;
+import com.ryan.eggwars.oldmechanics.CancelDroppingEgg;
+import com.ryan.eggwars.oldmechanics.DisableOffhand;
 import com.ryan.eggwars.oldmechanics.PearlCooldown;
 import com.ryan.eggwars.teams.TeamManager;
 import org.bukkit.Bukkit;
@@ -50,6 +52,8 @@ public final class EggWars extends JavaPlugin {
         
         getServer().getPluginManager().registerEvents(new AttackCooldown(), this);
         getServer().getPluginManager().registerEvents(new PearlCooldown(), this);
+        getServer().getPluginManager().registerEvents(new DisableOffhand(), this);
+        getServer().getPluginManager().registerEvents(new CancelDroppingEgg(), this);
         getServer().getPluginManager().registerEvents(new Testing(), this);
         getServer().getPluginManager().registerEvents(new ChatFormatter(), this);
         getServer().getPluginManager().registerEvents(new OnEggPunch(), this);

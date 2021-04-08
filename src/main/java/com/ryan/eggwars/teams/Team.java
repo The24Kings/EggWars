@@ -1,5 +1,6 @@
 package com.ryan.eggwars.teams;
 
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -19,7 +20,7 @@ public class Team {
     }
     
     /**
-     * Returns the {@link TeamColor} of the team.
+     * Returns the teams corresponding {@link TeamColor}.
      *
      * @return The {@link TeamColor} of the team.
      */
@@ -28,12 +29,32 @@ public class Team {
     }
     
     /**
-     * Returns the {@link ChatColor} of the team.
+     * Returns the team's corresponding {@link ChatColor}.
      *
-     * @return The {@link TeamColor} of the team.
+     * @return The {@link ChatColor} of the team.
      */
     public ChatColor getChatColor() {
         return teamColor.getChatColor();
+    }
+    
+    /**
+     * Returns the team's corresponding {@link TextColor}.
+     *
+     * @return The {@link TextColor} of the team.
+     */
+    public TextColor getTextColor() {
+        switch (teamColor) {
+            case RED:
+                return TextColor.color(207, 10, 10);
+            case BLUE:
+                return TextColor.color(0, 129, 204);
+            case GREEN:
+                return TextColor.color(12, 171, 28);
+            case YELLOW:
+                return TextColor.color(224, 224, 9);
+            default:
+                return TextColor.color(0, 0, 0);
+        }
     }
     
     /**
