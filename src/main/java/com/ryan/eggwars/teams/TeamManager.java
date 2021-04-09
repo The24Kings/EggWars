@@ -50,7 +50,7 @@ public class TeamManager {
         Component name = Component.text(teamColor.getChatColor() + player.getName());
         player.displayName(name);
         player.playerListName(name);
-        player.sendMessage("You have joined the " + TeamManager.getTeam(player).getBoldedName() + ChatColor.RESET + " team!");
+        player.sendMessage("You have joined the " + TeamManager.getTeam(player).getBoldedName() + ChatColor.RESET + " team.");
     }
     
     /**

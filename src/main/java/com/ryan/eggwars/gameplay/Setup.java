@@ -30,13 +30,13 @@ public class Setup {
         TeamManager.blue.nestLocations.add(new Location(EggWars.world, -1, 105, -62));
         TeamManager.blue.nestLocations.add(new Location(EggWars.world, 1, 105, -62));
     
-        TeamManager.yellow.nestLocations.add(new Location(EggWars.world, 60, 105, 0));
-        TeamManager.yellow.nestLocations.add(new Location(EggWars.world, 62, 105, -1));
-        TeamManager.yellow.nestLocations.add(new Location(EggWars.world, 62, 105, 1));
+        TeamManager.yellow.nestLocations.add(new Location(EggWars.world, 0, 105, 60));
+        TeamManager.yellow.nestLocations.add(new Location(EggWars.world, -1, 105, 62));
+        TeamManager.yellow.nestLocations.add(new Location(EggWars.world, 1, 105, 62));
     
-        TeamManager.green.nestLocations.add(new Location(EggWars.world, 0, 105, 60));
-        TeamManager.green.nestLocations.add(new Location(EggWars.world, 1, 105, 62));
-        TeamManager.green.nestLocations.add(new Location(EggWars.world, -1, 105, 62));
+        TeamManager.green.nestLocations.add(new Location(EggWars.world, 60, 105, 0));
+        TeamManager.green.nestLocations.add(new Location(EggWars.world, 62, 105, 1));
+        TeamManager.green.nestLocations.add(new Location(EggWars.world, 62, 105, -1));
     }
     
     public static void onGameStart() {

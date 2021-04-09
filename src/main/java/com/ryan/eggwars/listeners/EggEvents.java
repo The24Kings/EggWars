@@ -47,8 +47,8 @@ public class EggEvents implements Listener {
                 
                 player.sendMessage("first condition = " + first);
                 player.sendMessage("second condition = " + second);
-    
                 return;
+                
             } else {
                 player.sendMessage("in correct spot");
             }
