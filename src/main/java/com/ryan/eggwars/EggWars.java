@@ -36,7 +36,7 @@ public final class EggWars extends JavaPlugin {
             System.out.println(ChatColor.RED + "world is null");
         }
         
-        registerEvents();
+        registerEventsAndCommands();
         TeamManager.addTeamsToList();
         Setup.onPluginStart();
     }
@@ -46,7 +46,7 @@ public final class EggWars extends JavaPlugin {
         Cleanup.onPluginStop();
     }
     
-    private void registerEvents() {
+    private void registerEventsAndCommands() {
         
         getServer().getPluginManager().registerEvents(new AttackCooldown(), this);
         getServer().getPluginManager().registerEvents(new PearlCooldown(), this);
