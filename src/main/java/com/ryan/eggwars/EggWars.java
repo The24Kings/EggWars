@@ -28,18 +28,16 @@ public final class EggWars extends JavaPlugin {
     
     @Override
     public void onEnable() {
-        
+    
+        plugin = this;
         world = Bukkit.getWorld("eggwars");
-        
+    
         if (world == null) {
             System.out.println(ChatColor.RED + "world is null");
         }
         
         registerEvents();
         TeamManager.addTeamsToList();
-        
-        plugin = this;
-    
         Setup.onPluginStart();
     }
     

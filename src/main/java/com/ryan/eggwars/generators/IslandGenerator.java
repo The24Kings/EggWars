@@ -14,12 +14,12 @@ import java.util.Random;
 
 public class IslandGenerator {
     
-    private boolean stoppedGen = false;
+    // higher = less likely
+    private static final int ironChance = 10;
+    private static final int goldChance = 25;
+    private static boolean stoppedGens = false;
     private final Location location;
     private final World world;
-    // higher = less likely
-    private final int ironChance = 4;
-    private final int goldChance = 20;
     
     public IslandGenerator(Location location) {
         this.world = location.getWorld();
@@ -32,33 +32,37 @@ public class IslandGenerator {
     /**
      * Starts generating items.
      */
-    public void startGenerator() {
+    public static void startGenerators() {
         
         Random random = new Random();
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (stoppedGen) cancel();
+                if (stoppedGens) cancel();
                 
                 if (random.nextInt(ironChance) == 1) {
-                    Item droppedItem = world.dropItem(location, new ItemStack(Material.IRON_INGOT));
-                    droppedItem.setVelocity(new Vector(0, 0, 0));
+                    for (IslandGenerator generator : GeneratorManager.getIslandGenerators()) {
+                        Item droppedItem = generator.world.dropItem(generator.location, new ItemStack(Material.IRON_INGOT));
+                        droppedItem.setVelocity(new Vector(0, 0, 0));
+                    }
                 }
                 
                 if (random.nextInt(goldChance) == 1) {
-                    Item droppedItem = world.dropItem(location, new ItemStack(Material.GOLD_INGOT));
-                    droppedItem.setVelocity(new Vector(0, 0, 0));
+                    for (IslandGenerator generator : GeneratorManager.getIslandGenerators()) {
+                        Item droppedItem = generator.world.dropItem(generator.location, new ItemStack(Material.GOLD_INGOT));
+                        droppedItem.setVelocity(new Vector(0, 0, 0));
+                    }
                 }
             }
         }.runTaskTimer(EggWars.getPlugin(), 10, 10);
     }
     
     /**
-     * Stops the generator.
+     * Stops all generators.
      */
-    public void stopGenerator(boolean isDisabling) {
+    public static void stopGenerators(boolean isDisabling) {
         if (isDisabling) return;
-        stoppedGen = true;
-        Bukkit.getScheduler().runTaskLater(EggWars.getPlugin(), () -> stoppedGen = false, 10);
+        stoppedGens = true;
+        Bukkit.getScheduler().runTaskLater(EggWars.getPlugin(), () -> stoppedGens = false, 10);
     }
 }

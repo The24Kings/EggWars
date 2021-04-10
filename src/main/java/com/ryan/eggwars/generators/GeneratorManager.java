@@ -6,12 +6,11 @@ import java.util.ArrayList;
 
 public class GeneratorManager {
     
+    private static final ArrayList<IslandGenerator> islandGenerators = new ArrayList<>();
     private static final ArrayList<MiddleGenerator> diamondGenerators = new ArrayList<>();
     private static final ArrayList<MiddleGenerator> emeraldGenerators = new ArrayList<>();
     private static final ArrayList<MiddleGenerator> amethystGenerator = new ArrayList<>();
     private static final ArrayList<MiddleGenerator> middleGenerators = new ArrayList<>();
-    
-    private static final ArrayList<IslandGenerator> islandGenerators = new ArrayList<>();
     
     /**
      * Creates a new generator and adds it to the corresponding list in {@link GeneratorManager}.
@@ -25,7 +24,6 @@ public class GeneratorManager {
             case ISLAND:
                 IslandGenerator islandGen = new IslandGenerator(location);
                 islandGenerators.add(islandGen);
-                islandGen.startGenerator();
                 break;
             
             case DIAMOND:
@@ -56,9 +54,7 @@ public class GeneratorManager {
             generator.startGenerator();
         }
         
-        for (IslandGenerator generator : islandGenerators) {
-            generator.startGenerator();
-        }
+        IslandGenerator.startGenerators();
     }
     
     /**
@@ -70,9 +66,7 @@ public class GeneratorManager {
             gen.stopGenerator(isDisabling);
         }
         
-        for (IslandGenerator gen : islandGenerators) {
-            gen.stopGenerator(isDisabling);
-        }
+        IslandGenerator.stopGenerators(isDisabling);
         
         middleGenerators.clear();
         diamondGenerators.clear();

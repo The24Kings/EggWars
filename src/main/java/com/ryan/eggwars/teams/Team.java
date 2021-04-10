@@ -50,11 +50,11 @@ public class Team {
     public TextColor getTextColor() {
         switch (teamColor) {
             case RED:
-                return TextColor.color(207, 10, 10);
+                return TextColor.color(232, 56, 56);
             case BLUE:
-                return TextColor.color(0, 129, 204);
+                return TextColor.color(58, 124, 240);
             case GREEN:
-                return TextColor.color(12, 171, 28);
+                return TextColor.color(70, 224, 70);
             case YELLOW:
                 return TextColor.color(224, 224, 9);
             default:

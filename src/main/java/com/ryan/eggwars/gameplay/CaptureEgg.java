@@ -1,5 +1,6 @@
 package com.ryan.eggwars.gameplay;
 
+import com.ryan.eggwars.EggWars;
 import com.ryan.eggwars.teams.Team;
 import com.ryan.eggwars.teams.TeamManager;
 import com.ryan.eggwars.util.EggUtil;
@@ -13,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 
@@ -42,7 +44,7 @@ public class CaptureEgg {
             player.sendMessage(ChatColor.RED + "You cannot pick up multiple eggs!");
             return;
         }
-    
+        
         // the egg was captured
         if (capturedEggs.containsKey(eggTeam)) {
             pickupOrReturnEgg(player, eggTeam, egg);
@@ -53,7 +55,7 @@ public class CaptureEgg {
         if (eggTeam.getTeamColor() != playerTeam.getTeamColor()) {
             egg.setType(Material.AIR);
             givePlayerEgg(player, eggTeam);
-    
+            
             player.getWorld().sendMessage(Component.text(eggTeam.getBoldedName() + ChatColor.RESET +
                     " team's egg was picked up by " + NameUtil.getBoldedName(player) + ChatColor.RESET + "!"));
             
@@ -75,7 +77,6 @@ public class CaptureEgg {
             pickedUpEggs.remove(player);
         }
     }
-    
     
     
     private static void pickupOrReturnEgg(Player player, Team eggTeam, Block egg) {
@@ -126,16 +127,32 @@ public class CaptureEgg {
         egg.setItemMeta(eggMeta);
         player.getInventory().setItem(EquipmentSlot.OFF_HAND, egg);
         pickedUpEggs.put(player, eggTeam);
+        sendEggTitle(player, eggTeam);
+        
     }
     
     private static void clearNestSpot(Team eggTeam) {
         Team teamWhoCaptured = capturedEggs.get(eggTeam);
-    
+        
         // if the nest location is the correct spot for this teams egg, clear it
         for (Location location : teamWhoCaptured.nestLocations) {
             if (EggUtil.getEggTeam(location) == eggTeam) {
                 location.getBlock().setType(Material.AIR);
             }
         }
+    }
+    
+    private static void sendEggTitle(Player player, Team eggTeam) {
+        
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (player.getInventory().getItemInOffHand().getType() != Material.DRAGON_EGG) {
+                    cancel();
+                }
+                
+                player.sendActionBar(Component.text("You are holding " + eggTeam.getName().toLowerCase() + " team's egg!", eggTeam.getTextColor()));
+            }
+        }.runTaskTimerAsynchronously(EggWars.getPlugin(), 0, 10);
     }
 }
