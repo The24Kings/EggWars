@@ -68,23 +68,25 @@ public class TeamManager {
         
         TeamColor teamColor = team.getTeamColor();
         
-        switch (teamColor) {
-            case RED:
-                red.removePlayer(player);
-                break;
-            
-            case YELLOW:
-                yellow.removePlayer(player);
-                break;
-            
-            case GREEN:
-                green.removePlayer(player);
-                break;
-            
-            case BLUE:
-                blue.removePlayer(player);
-                break;
-        }
+//        switch (teamColor) {
+//            case RED:
+//                red.removePlayer(player);
+//                break;
+//
+//            case YELLOW:
+//                yellow.removePlayer(player);
+//                break;
+//
+//            case GREEN:
+//                green.removePlayer(player);
+//                break;
+//
+//            case BLUE:
+//                blue.removePlayer(player);
+//                break;
+//        }
+        
+        team.removePlayer(player);
         
         Component name = Component.text(player.getName());
         player.displayName(name);
