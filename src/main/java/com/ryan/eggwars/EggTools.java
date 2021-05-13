@@ -2,10 +2,7 @@ package com.ryan.eggwars;
 
 import com.ryan.eggwars.gameplay.CaptureEgg;
 import com.ryan.eggwars.gameplay.Setup;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.command.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -14,7 +11,8 @@ import org.bukkit.event.Listener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EggTools implements Listener, CommandExecutor, TabCompleter {
+public class EggTools implements Listener, TabExecutor {
+    
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) return true;

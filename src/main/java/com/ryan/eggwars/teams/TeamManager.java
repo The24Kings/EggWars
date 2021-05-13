@@ -66,8 +66,8 @@ public class TeamManager {
             return;
         }
         
-        TeamColor teamColor = team.getTeamColor();
-        
+//        TeamColor teamColor = team.getTeamColor();
+//
 //        switch (teamColor) {
 //            case RED:
 //                red.removePlayer(player);
