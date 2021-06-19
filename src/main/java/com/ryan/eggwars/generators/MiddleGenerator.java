@@ -60,8 +60,8 @@ public class MiddleGenerator {
                 this.displayItem = new ItemStack(Material.EMERALD_BLOCK);
                 break;
             case AMETHYST:
-                this.itemType = new ItemStack(Material.PURPLE_DYE);
-                this.displayItem = new ItemStack(Material.PURPLE_CONCRETE);
+                this.itemType = new ItemStack(Material.AMETHYST_SHARD);
+                this.displayItem = new ItemStack(Material.AMETHYST_BLOCK);
                 break;
                 
             default:

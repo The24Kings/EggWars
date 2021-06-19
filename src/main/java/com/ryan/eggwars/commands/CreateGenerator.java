@@ -4,11 +4,14 @@ import com.ryan.eggwars.generators.GeneratorManager;
 import com.ryan.eggwars.generators.GeneratorType;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
-public class CreateGenerator implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.List;
+
+public class CreateGenerator implements TabExecutor {
     
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -35,5 +38,18 @@ public class CreateGenerator implements CommandExecutor {
             }
         }
         return true;
+    }
+    
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        ArrayList<String> parameters = new ArrayList<>();
+        
+        parameters.add("island");
+        parameters.add("diamond");
+        parameters.add("emerald");
+        parameters.add("amethyst");
+        parameters.add("clear");
+        
+        return parameters;
     }
 }

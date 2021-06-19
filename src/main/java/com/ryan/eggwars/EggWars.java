@@ -1,6 +1,9 @@
 package com.ryan.eggwars;
 
-import com.ryan.eggwars.commands.*;
+import com.ryan.eggwars.commands.CreateGenerator;
+import com.ryan.eggwars.commands.JoinTeam;
+import com.ryan.eggwars.commands.LeaveTeam;
+import com.ryan.eggwars.commands.StartAndStopGame;
 import com.ryan.eggwars.gameplay.Cleanup;
 import com.ryan.eggwars.gameplay.Setup;
 import com.ryan.eggwars.listeners.ChatFormatter;
@@ -11,9 +14,10 @@ import com.ryan.eggwars.oldmechanics.DisableOffhand;
 import com.ryan.eggwars.oldmechanics.PearlCooldown;
 import com.ryan.eggwars.teams.TeamManager;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.logging.Level;
 
 public final class EggWars extends JavaPlugin {
     
@@ -33,7 +37,7 @@ public final class EggWars extends JavaPlugin {
         world = Bukkit.getWorld("eggwars");
     
         if (world == null) {
-            System.out.println(ChatColor.RED + "world is null");
+            getLogger().log(Level.WARNING, "WORLD IS NULL");
         }
         
         registerEventsAndCommands();
@@ -57,12 +61,12 @@ public final class EggWars extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EggEvents(), this);
         
         getCommand("join").setExecutor(new JoinTeam());
-        getCommand("join").setTabCompleter(new JoinTeamTabCompleter());
+        getCommand("join").setTabCompleter(new JoinTeam());
         
         getCommand("leave").setExecutor(new LeaveTeam());
         
         getCommand("gen").setExecutor(new CreateGenerator());
-        getCommand("gen").setTabCompleter(new CreateGeneratorTabCompleter());
+        getCommand("gen").setTabCompleter(new CreateGenerator());
         
         getCommand("eggtool").setExecutor(new EggTools());
         getCommand("eggtool").setTabCompleter(new EggTools());

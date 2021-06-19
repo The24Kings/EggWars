@@ -3,11 +3,14 @@ package com.ryan.eggwars.commands;
 import com.ryan.eggwars.teams.TeamColor;
 import com.ryan.eggwars.teams.TeamManager;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
-public class JoinTeam implements CommandExecutor {
+import java.util.ArrayList;
+import java.util.List;
+
+public class JoinTeam implements TabExecutor {
     
     
     @Override
@@ -35,5 +38,17 @@ public class JoinTeam implements CommandExecutor {
         }
         
         return true;
+    }
+    
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        
+        ArrayList<String> parameters = new ArrayList<>();
+        
+        for (TeamColor teamColor : TeamColor.values()) {
+            parameters.add(teamColor.toString().toLowerCase());
+        }
+        
+        return parameters;
     }
 }
