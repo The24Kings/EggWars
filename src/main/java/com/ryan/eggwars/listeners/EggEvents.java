@@ -1,6 +1,7 @@
 package com.ryan.eggwars.listeners;
 
 import com.ryan.eggwars.gameplay.CaptureEgg;
+import com.ryan.eggwars.gameplay.Setup;
 import com.ryan.eggwars.teams.Team;
 import com.ryan.eggwars.teams.TeamManager;
 import org.bukkit.ChatColor;
@@ -38,12 +39,12 @@ public class EggEvents implements Listener {
             }
     
             // if its not placed on the correct team's wool or not on a nest
-            if (!(blockPlacedOn == eggTeam.getWool()) || !playerTeam.nestLocations.contains(event.getBlockPlaced().getLocation())) {
+            if (!(blockPlacedOn == eggTeam.getWool()) || Setup.nestLocations.contains(event.getBlockPlaced().getLocation())) {
                 player.sendMessage(ChatColor.RED + "Place this egg in the correct spot in your nest!");
                 event.setCancelled(true);
                 
                 boolean first = blockPlacedOn == eggTeam.getWool();
-                boolean second = playerTeam.nestLocations.contains(event.getBlockPlaced().getLocation());
+                boolean second = Setup.nestLocations.contains(event.getBlockPlaced().getLocation());
                 
                 player.sendMessage("first condition = " + first);
                 player.sendMessage("second condition = " + second);

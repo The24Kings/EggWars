@@ -25,6 +25,7 @@ public class JoinTeam implements TabExecutor {
             
             if (args[0].equalsIgnoreCase("red")) {
                 TeamManager.joinTeam(player, TeamColor.RED);
+
             } else if (args[0].equalsIgnoreCase("yellow")) {
                 TeamManager.joinTeam(player, TeamColor.YELLOW);
                 
@@ -44,9 +45,11 @@ public class JoinTeam implements TabExecutor {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         
         ArrayList<String> parameters = new ArrayList<>();
-        
-        for (TeamColor teamColor : TeamColor.values()) {
-            parameters.add(teamColor.toString().toLowerCase());
+
+        if(args.length == 1) {
+            for (TeamColor teamColor : TeamColor.values()) {
+                parameters.add(teamColor.toString().toLowerCase());
+            }
         }
         
         return parameters;

@@ -50,23 +50,22 @@ public class MiddleGenerator {
     
     public MiddleGenerator(GeneratorType generatorType, int intervalSeconds, Location location) {
         switch (generatorType) {
-            case DIAMOND:
+            case DIAMOND -> {
                 this.itemType = new ItemStack(Material.DIAMOND);
                 this.displayItem = new ItemStack(Material.DIAMOND_BLOCK);
-                break;
-                
-            case EMERALD:
+            }
+            case EMERALD -> {
                 this.itemType = new ItemStack(Material.EMERALD);
                 this.displayItem = new ItemStack(Material.EMERALD_BLOCK);
-                break;
-            case AMETHYST:
+            }
+            case AMETHYST -> {
                 this.itemType = new ItemStack(Material.AMETHYST_SHARD);
                 this.displayItem = new ItemStack(Material.AMETHYST_BLOCK);
-                break;
-                
-            default:
+            }
+            default -> {
                 this.itemType = new ItemStack(Material.STONE);
                 this.displayItem = new ItemStack(Material.STONE);
+            }
         }
         
         this.generatorType = generatorType;

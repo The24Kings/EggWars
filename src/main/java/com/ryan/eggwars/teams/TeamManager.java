@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class TeamManager {
     
     public static final ArrayList<Team> teams = new ArrayList<>();
+    //TODO for future, replace specific cords with config for multiple maps :D
     public static Team red = new Team("Red", TeamColor.RED, new Location(EggWars.world, -41, 101, 0));
     public static Team yellow = new Team("Yellow", TeamColor.YELLOW, new Location(EggWars.world, 0, 101, 41));
     public static Team green = new Team("Green", TeamColor.GREEN, new Location(EggWars.world, 41, 101, 0));
@@ -28,23 +29,12 @@ public class TeamManager {
             player.sendMessage(ChatColor.RED + "Please leave your team before joining a new one!");
             return;
         }
-        
+
         switch (teamColor) {
-            case RED:
-                red.addPlayer(player);
-                break;
-            
-            case YELLOW:
-                yellow.addPlayer(player);
-                break;
-            
-            case GREEN:
-                green.addPlayer(player);
-                break;
-            
-            case BLUE:
-                blue.addPlayer(player);
-                break;
+            case RED -> red.addPlayer(player);
+            case YELLOW -> yellow.addPlayer(player);
+            case GREEN -> green.addPlayer(player);
+            case BLUE -> blue.addPlayer(player);
         }
         
         Component name = Component.text(teamColor.getChatColor() + player.getName());
@@ -66,25 +56,14 @@ public class TeamManager {
             return;
         }
         
-//        TeamColor teamColor = team.getTeamColor();
-//
-//        switch (teamColor) {
-//            case RED:
-//                red.removePlayer(player);
-//                break;
-//
-//            case YELLOW:
-//                yellow.removePlayer(player);
-//                break;
-//
-//            case GREEN:
-//                green.removePlayer(player);
-//                break;
-//
-//            case BLUE:
-//                blue.removePlayer(player);
-//                break;
-//        }
+        TeamColor teamColor = team.getTeamColor();
+
+        switch (teamColor) {
+            case RED -> red.removePlayer(player);
+            case YELLOW -> yellow.removePlayer(player);
+            case GREEN -> green.removePlayer(player);
+            case BLUE -> blue.removePlayer(player);
+        }
         
         team.removePlayer(player);
         
@@ -111,33 +90,23 @@ public class TeamManager {
     }
     
     public static Team getTeam(TeamColor teamColor) {
-        switch (teamColor) {
-            case RED:
-                return red;
-            case BLUE:
-                return blue;
-            case GREEN:
-                return green;
-            case YELLOW:
-                return yellow;
-            default:
-                return null;
-        }
+        return switch (teamColor) {
+            case RED -> red;
+            case BLUE -> blue;
+            case GREEN -> green;
+            case YELLOW -> yellow;
+            default -> null;
+        };
     }
     
     public static Team getTeam(Material wool) {
-        switch (wool) {
-            case RED_WOOL:
-                return red;
-            case BLUE_WOOL:
-                return blue;
-            case LIME_WOOL:
-                return green;
-            case YELLOW_WOOL:
-                return yellow;
-            default:
-                return null;
-        }
+        return switch (wool) {
+            case RED_WOOL -> red;
+            case BLUE_WOOL -> blue;
+            case LIME_WOOL -> green;
+            case YELLOW_WOOL -> yellow;
+            default -> null;
+        };
     }
     
     public static void addTeamsToList() {

@@ -10,7 +10,9 @@ public class LeaveTeam implements CommandExecutor {
     
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (label.equalsIgnoreCase("leave") && sender instanceof Player) {
+        if (label.equalsIgnoreCase("leave")) {
+            if (!(sender instanceof Player)) return true;
+
             TeamManager.leaveTeam((Player) sender);
         }
         

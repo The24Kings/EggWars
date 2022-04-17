@@ -1,4 +1,4 @@
-package com.ryan.eggwars;
+package com.ryan.eggwars.commands;
 
 import com.ryan.eggwars.gameplay.CaptureEgg;
 import com.ryan.eggwars.gameplay.Setup;
@@ -41,10 +41,12 @@ public class EggTools implements Listener, TabExecutor {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         ArrayList<String> parameters = new ArrayList<>();
-    
-        parameters.add("clearitems");
-        parameters.add("cleareggs");
-        parameters.add("lists");
+
+        if(args.length == 1) {
+            parameters.add("clearitems");
+            parameters.add("cleareggs");
+            parameters.add("lists");
+        }
     
         return parameters;
     }

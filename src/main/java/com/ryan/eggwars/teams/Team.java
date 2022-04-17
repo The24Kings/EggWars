@@ -1,17 +1,16 @@
 package com.ryan.eggwars.teams;
 
+import com.ryan.eggwars.EggWars;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-
 import java.util.ArrayList;
 import java.util.UUID;
 
 public class Team {
-    
-    public ArrayList<Location> nestLocations = new ArrayList<>();
     private final Location eggSpawn;
     private final String name;
     private final TeamColor teamColor;
@@ -48,18 +47,13 @@ public class Team {
      * @return The {@link TextColor} of the team.
      */
     public TextColor getTextColor() {
-        switch (teamColor) {
-            case RED:
-                return TextColor.color(232, 56, 56);
-            case BLUE:
-                return TextColor.color(58, 124, 240);
-            case GREEN:
-                return TextColor.color(70, 224, 70);
-            case YELLOW:
-                return TextColor.color(224, 224, 9);
-            default:
-                return TextColor.color(0, 0, 0);
-        }
+        return switch (teamColor) {
+            case RED -> TextColor.color(232, 56, 56);
+            case BLUE -> TextColor.color(58, 124, 240);
+            case GREEN -> TextColor.color(70, 224, 70);
+            case YELLOW -> TextColor.color(224, 224, 9);
+            default -> TextColor.color(0, 0, 0);
+        };
     }
     
     /**
@@ -67,18 +61,13 @@ public class Team {
      * @return The {@link Material} of the corresponding wool.
      */
     public Material getWool() {
-        switch (teamColor) {
-            case RED:
-                return Material.RED_WOOL;
-            case BLUE:
-                return Material.BLUE_WOOL;
-            case GREEN:
-                return Material.LIME_WOOL;
-            case YELLOW:
-                return Material.YELLOW_WOOL;
-            default:
-                return null;
-        }
+        return switch (teamColor) {
+            case RED -> Material.RED_WOOL;
+            case BLUE -> Material.BLUE_WOOL;
+            case GREEN -> Material.LIME_WOOL;
+            case YELLOW -> Material.YELLOW_WOOL;
+            default -> null;
+        };
     }
     
     /**
@@ -169,7 +158,7 @@ public class Team {
     public Team getLastSeenEggLocation() {
         return lastSeenEggLocation;
     }
-    
+
     /**
      * Gets the original spawn location of this team's egg.
      * @return The original {@link Location} of this teams egg.
@@ -177,27 +166,19 @@ public class Team {
     public Location getEggSpawn() {
         return eggSpawn;
     }
-    
+
     /**
      * Spawns this team's egg.
      */
     public void spawnEgg() {
         eggSpawn.getBlock().setType(Material.DRAGON_EGG);
     }
-    
+
     /**
      * Despawns this team's egg
      */
     public void despawnEgg() {
         eggSpawn.getBlock().setType(Material.AIR);
-    }
-    
-    public void clearNest() {
-        for (Location location : nestLocations) {
-            if (location.getBlock().getType() == Material.DRAGON_EGG) {
-                location.getBlock().setType(Material.AIR);
-            }
-        }
     }
 }
 

@@ -15,30 +15,15 @@ public class OldItems {
     public static ItemStack getOldSword(Material material) {
         ItemStack sword = new ItemStack(material);
         ItemMeta swordMeta = sword.getItemMeta();
-        int damage;
-        
-        switch (material) {
-            case DIAMOND_SWORD:
-                damage = 8;
-                break;
-            
-            case IRON_SWORD:
-                damage = 7;
-                break;
-            
-            case STONE_SWORD:
-                damage = 6;
-                break;
-            
-            case GOLDEN_SWORD:
-            case WOODEN_SWORD:
-                damage = 5;
-                break;
-            
-            default:
-                damage = 2;
-        }
-        
+        int damage = switch (material) {
+            case DIAMOND_SWORD -> 8;
+            case IRON_SWORD -> 7;
+            case STONE_SWORD -> 6;
+            case GOLDEN_SWORD -> 4;
+            case WOODEN_SWORD -> 5;
+            default -> 2;
+        };
+
         AttributeModifier modifier = new AttributeModifier(UUID.randomUUID(), "generic.attack_damage", damage, AttributeModifier.Operation.ADD_NUMBER);
         swordMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, modifier);
         

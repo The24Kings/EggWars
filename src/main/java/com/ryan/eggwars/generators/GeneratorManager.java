@@ -4,6 +4,8 @@ import org.bukkit.Location;
 
 import java.util.ArrayList;
 
+//TODO add protection around gens
+//TODO add cap to amount resources at a given gen
 public class GeneratorManager {
     
     private static final ArrayList<IslandGenerator> islandGenerators = new ArrayList<>();
@@ -19,33 +21,30 @@ public class GeneratorManager {
      * @param location      The location that this generator will spawn at.
      */
     public static void createGenerator(GeneratorType generatorType, Location location) {
-        
+
         switch (generatorType) {
-            case ISLAND:
+            case ISLAND -> {
                 IslandGenerator islandGen = new IslandGenerator(location);
                 islandGenerators.add(islandGen);
-                break;
-            
-            case DIAMOND:
-                MiddleGenerator diamondGen = new MiddleGenerator(GeneratorType.DIAMOND, 15, location);
+            }
+            case DIAMOND -> {
+                MiddleGenerator diamondGen = new MiddleGenerator(GeneratorType.DIAMOND, 30, location);
                 diamondGenerators.add(diamondGen);
                 diamondGen.spawnGenerator();
                 middleGenerators.add(diamondGen);
-                break;
-            
-            case EMERALD:
-                MiddleGenerator emeraldGen = new MiddleGenerator(GeneratorType.EMERALD, 30, location);
+            }
+            case EMERALD -> {
+                MiddleGenerator emeraldGen = new MiddleGenerator(GeneratorType.EMERALD, 60, location);
                 emeraldGenerators.add(emeraldGen);
                 emeraldGen.spawnGenerator();
                 middleGenerators.add(emeraldGen);
-                break;
-            
-            case AMETHYST:
-                MiddleGenerator amethystGen = new MiddleGenerator(GeneratorType.AMETHYST, 45, location);
+            }
+            case AMETHYST -> {
+                MiddleGenerator amethystGen = new MiddleGenerator(GeneratorType.AMETHYST, 90, location);
                 amethystGenerator.add(amethystGen);
                 amethystGen.spawnGenerator();
                 middleGenerators.add(amethystGen);
-                break;
+            }
         }
     }
     

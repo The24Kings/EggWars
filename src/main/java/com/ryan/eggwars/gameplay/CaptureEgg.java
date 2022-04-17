@@ -45,7 +45,7 @@ public class CaptureEgg {
             return;
         }
         
-        // the egg was captured
+        // the captured egg was captured
         if (capturedEggs.containsKey(eggTeam)) {
             pickupOrReturnEgg(player, eggTeam, egg);
             return;
@@ -102,14 +102,14 @@ public class CaptureEgg {
                     teamWhoCaptured.getBoldedName() + ChatColor.RESET + " team!"));
             
             givePlayerEgg(player, eggTeam);
-            clearNestSpot(eggTeam);
+            clearNestSpot(player.getTargetBlock(4).getLocation());
         }
     }
     
     private static void returnEgg(Player player, Team eggTeam) {
         Team teamWhoCaptured = capturedEggs.get(eggTeam);
         
-        clearNestSpot(eggTeam);
+        clearNestSpot(player.getTargetBlock(4).getLocation());
         
         capturedEggs.remove(eggTeam);
         eggTeam.getEggSpawn().getBlock().setType(Material.DRAGON_EGG);
@@ -131,15 +131,8 @@ public class CaptureEgg {
         
     }
     
-    private static void clearNestSpot(Team eggTeam) {
-        Team teamWhoCaptured = capturedEggs.get(eggTeam);
-        
-        // if the nest location is the correct spot for this teams egg, clear it
-        for (Location location : teamWhoCaptured.nestLocations) {
-            if (EggUtil.getEggTeam(location) == eggTeam) {
-                location.getBlock().setType(Material.AIR);
-            }
-        }
+    private static void clearNestSpot(Location location) {
+        location.getBlock().setType(Material.AIR);
     }
     
     private static void sendEggTitle(Player player, Team eggTeam) {
@@ -151,7 +144,7 @@ public class CaptureEgg {
                     cancel();
                 }
                 
-                player.sendActionBar(Component.text("You are holding " + eggTeam.getName().toLowerCase() + " team's egg!", eggTeam.getTextColor()));
+                player.sendActionBar(Component.text(ChatColor.BOLD + eggTeam.getName().toUpperCase() + ChatColor.RESET + " team's egg", eggTeam.getTextColor()));
             }
         }.runTaskTimerAsynchronously(EggWars.getPlugin(), 0, 10);
     }

@@ -15,7 +15,8 @@ import java.util.Random;
 public class IslandGenerator {
     
     // higher = less likely
-    private static final int ironChance = 10;
+    //TODO adjust timings of iron and gold
+    private static final int ironChance = 3;
     private static final int goldChance = 25;
     private static boolean stoppedGens = false;
     private final Location location;

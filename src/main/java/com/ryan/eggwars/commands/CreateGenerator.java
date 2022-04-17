@@ -16,6 +16,7 @@ public class CreateGenerator implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) return true;
+
         Player player = (Player) sender;
         Location playerLocation = new Location(player.getWorld(), player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ());
         
@@ -43,12 +44,14 @@ public class CreateGenerator implements TabExecutor {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         ArrayList<String> parameters = new ArrayList<>();
-        
-        parameters.add("island");
-        parameters.add("diamond");
-        parameters.add("emerald");
-        parameters.add("amethyst");
-        parameters.add("clear");
+
+        if(args.length == 1) {
+            parameters.add("island");
+            parameters.add("diamond");
+            parameters.add("emerald");
+            parameters.add("amethyst");
+            parameters.add("clear");
+        }
         
         return parameters;
     }
